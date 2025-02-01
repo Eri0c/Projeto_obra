@@ -17,5 +17,4 @@ CONTROLLERS
 ResponsavelController com os metodos para gerenciar obras e acessar o perfil do responsavel. Método gerenciar obras recupera obras atribuidas ao responsavel e as exibe na interface.
 
 VIEWS
-
 gerenciar-obras que exibe as obras gerenciadas pelo responsavel.
