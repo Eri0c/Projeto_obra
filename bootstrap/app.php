@@ -12,7 +12,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        //Registrando o middleware
+        $middleware->alias([
+            'verificaResponsavel' => \App\Http\Middleware\VerificaResponsavel::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

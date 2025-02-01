@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\obra;
+use App\Models\Obra;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -14,6 +14,8 @@ class ObraController extends Controller
     public function index()
     {
         //
+        $obras = Obra::all();
+        return view('obras.index', compact('obras'));
     }
 
     /**

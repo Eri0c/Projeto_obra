@@ -20,6 +20,31 @@
             </div>
 
             <div class="mt-4">
+                <x-label for="cpf" value="{{__('CPF')}}"/>
+                <x-input id="cpf" class="block mt-1 w-full" type="text" name="cpf" :value="old('cpf')" required />
+            </div>
+
+            <div class="mt-4">
+                <x-label for="endereco" value="{{__('Endereco')}}"/>
+                <x-input id="endereco" class="block mt-1 w-full" type="text" name="endereco" :value="old('endereco')" required />
+            </div>
+
+            <div class="mt-4">
+                <x-label for="telefone" value="{{ __('Telefone') }}" />
+                <x-input id="telefone" class="block mt-1 w-full" type="text" name="telefone" :value="old('telefone')" placeholder="Telefone (opcional)" />
+            </div>
+
+
+            <div class="mt-4">
+                <x-label for="tipo" value="{{__('Tipo de Usuário')}}"/>
+                <select id="tipo" name="tipo" class="block mt-1 w-full" required>
+                    <option value="cliente" {{ old('tipo') == 'cliente' ? 'selected' : ''}}>Cliente</option>
+                    <option value="responsavel" {{ old('tipo') == 'responsavel' ? 'selected' : ''}}>Responsavel</option>
+                    <option value="colaborador" {{ old('tipo') == 'colaborador' ? 'selected' : ''}}>Colaborador</option>
+                </select>
+            </div>
+
+            <div class="mt-4">
                 <x-label for="password" value="{{ __('Password') }}" />
                 <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
             </div>
