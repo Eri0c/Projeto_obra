@@ -1,4 +1,4 @@
-Estou criando um projeto que ajuda em meu trabalho.
+Estou criando um projeto para contribuir em meu ambiente de trabalho.
 A intenção é que padronize a organização no ambiente de obra.
 O projeto tem o intuito de ser usado pelo Responsavel de obra, Cliente(que contrata) e Colaborador. Pensando em porporcionar uma melhoria para ambos.
 
