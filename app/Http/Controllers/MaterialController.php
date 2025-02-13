@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\tarefas;
+use App\Models\Material;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class TarefasController extends Controller
+class MaterialController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +35,7 @@ class TarefasController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(tarefas $tarefas)
+    public function show(material $material)
     {
         //
     }
@@ -43,7 +43,7 @@ class TarefasController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(tarefas $tarefas)
+    public function edit(material $material)
     {
         //
     }
@@ -51,7 +51,7 @@ class TarefasController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, tarefas $tarefas)
+    public function update(Request $request, material $material)
     {
         //
     }
@@ -59,7 +59,7 @@ class TarefasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(tarefas $tarefas)
+    public function destroy(material $material)
     {
         //
     }

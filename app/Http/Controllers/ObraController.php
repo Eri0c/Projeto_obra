@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Obra;
+use App\Models\Obras;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ObraController extends Controller
 {
@@ -14,8 +15,8 @@ class ObraController extends Controller
     public function index()
     {
         //
-        $obras = Obra::all();
-        return view('obras.index', compact('obras'));
+        $obras = Obras::all();
+        return view('responsavel.gerenciar-obras', compact('obras'));
     }
 
     /**
@@ -24,6 +25,7 @@ class ObraController extends Controller
     public function create()
     {
         //
+        return view('responsavel.criar-obra');
     }
 
     /**
@@ -32,20 +34,46 @@ class ObraController extends Controller
     public function store(Request $request)
     {
         //
+        $validated = $request->validate([
+            'nome' => 'required|string|max:255',
+            'descricao' => 'required|string|max:1000',
+            'endereco' => 'required|string|max:255',
+            'status' => 'required|string',
+            'data_inicio' => 'required|date',
+            'data_prevista_conclusao' => 'required|date',
+        ]);
+
+        $obra = new Obras();
+        $obra->nome = $validated['nome'];
+        $obra->descricao = $validated['descricao'];
+        $obra->endereco = $validated['endereco'];
+        $obra->data_inicio = $validated['data_inicio'];
+        $obra->data_prevista_conclusao = $validated['data_prevista_conclusao'];
+        $obra->responsavel_id = auth()->user()->id;
+        $obra->codigo_acesso = Str::random(10);
+
+        $obra->save();
+
+        return redirect()->route('obras.index')->with('sucess', 'Obra criada com sucesso!');
+        
+        
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(obra $obra)
+    public function show($id)
     {
         //
+        $obra = Obras::with('tarefas')->findOrFail($id);
+        return view('responsavel.obra-detalhes', compact('obra'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(obra $obra)
+    public function edit(Obras $obras)
     {
         //
     }
@@ -53,7 +81,7 @@ class ObraController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, obra $obra)
+    public function update(Request $request, obras $obra)
     {
         //
     }
@@ -61,7 +89,7 @@ class ObraController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(obra $obra)
+    public function destroy(obras $obra)
     {
         //
     }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Obra;
+use App\Models\Obras;
 
 class ResponsavelController extends Controller
 {
@@ -12,10 +12,12 @@ class ResponsavelController extends Controller
 
     public function gerenciarObras()
     {
-        $obras = Obra::where('id', auth()->id())->get();
+        $obras = Obras::where('id', auth()->id())->get();
 
         return view('responsavel.gerenciar-obras', compact('obras'));
     }
+
+    
 
     public function perfil()
     {

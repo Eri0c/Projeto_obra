@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string ('descricao');
             $table->string ('endereco');
-            $table->string ('codigo_acesso')->unique();//Garantia de ser unico
-            $table->enum('status',['em andamento', 'concluida', 'em espera']);//Campo de status com valores possiveis
+            $table->foreignId('responsavel_id')->constrained('users')->onDelete('cascade');
+            $table->string ('codigo_acesso')->unique();
+            $table->enum('status',['em andamento', 'concluida', 'em espera']);
             $table->date('data_inicio');
             $table->date('data_prevista_conclusao');
             $table->timestamps();
