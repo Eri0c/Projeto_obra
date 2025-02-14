@@ -1,8 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 text-center leading-tight ">
             {{ __('Criar nova obra') }}
         </h2>
+        <a href="{{ route('obras.index') }}" class="bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                Gerenciar obras
+            </a>
     </x-slot>
 
     <div class="py-12">
@@ -47,7 +50,7 @@
                             <input type="date" name="data_prevista_conclusao" id="data_prevista_conclusao" class="mt-1 block w-full" required>
                         </div>
 
-                        <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md">Criar Obra</button>
+                        <button type="submit" class="bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Criar Obra</button>
                     </form>
                 </div>
             </div>

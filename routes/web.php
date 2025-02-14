@@ -24,13 +24,13 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::resource('obras', ObraController::class);
+
 
 Route::middleware(['verificaResponsavel'])->group(function () {
     Route::get('/gerenciar-obras', [ResponsavelController::class, 'gerenciarObras'])->name('gerenciarObras');
     Route::get('/perfil', [ResponsavelController::class, 'perfil']);
-
     Route::get('/responsavel/criar-obra', [ObraController::class, 'create'])->name('obras.create');
+    Route::resource('obras', ObraController::class);
 });
 
 Route::middleware(['auth'])->group(function (){

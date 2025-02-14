@@ -9,13 +9,17 @@ use Illuminate\Support\Str;
 
 class ObraController extends Controller
 {
+
+   
+    
+    
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         //
-        $obras = Obras::all();
+        $obras = Obras::where('responsavel_id', auth()->id())->get();
         return view('responsavel.gerenciar-obras', compact('obras'));
     }
 
@@ -66,7 +70,11 @@ class ObraController extends Controller
     public function show($id)
     {
         //
-        $obra = Obras::with('tarefas')->findOrFail($id);
+        $obra = Obras::findOrFail($id);
+
+        if ($obra->responsavel_id != auth()->id()){
+            abort(403, 'Você não tem permissão para visualizar esta obra ');
+        }
         return view('responsavel.obra-detalhes', compact('obra'));
     }
 

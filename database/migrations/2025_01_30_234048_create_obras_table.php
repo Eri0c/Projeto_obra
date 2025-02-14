@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('obras', function (Blueprint $table) {
             $table->id();
+            $table->string('nome');
             $table->string ('descricao');
             $table->string ('endereco');
             $table->foreignId('responsavel_id')->constrained('users')->onDelete('cascade');

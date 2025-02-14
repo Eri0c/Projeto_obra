@@ -40,6 +40,7 @@ class TarefaController extends Controller
         //Validação de dados
         $request->validate([
             'titulo' => 'required|string|max:255',
+            'comodo' => 'required|string|max:255',
             'descricao' => 'required|string',
             'status' => 'required|string',
             'tipo' => 'required|string',
@@ -50,13 +51,14 @@ class TarefaController extends Controller
 
         Tarefas::create([
             'titulo' => $request->titulo,
+            'comodo' => $request->comodo,
             'descricao' => $request->descricao,
             'status' => $request->status,
             'tipo' => $request->tipo,
             'obra_id' => $request->obra_id,
         ]);
 
-        return redirect()->route('obras.show')->with('sucess', 'Tarefa Criada com sucesso.');
+        return redirect()->route('tarefas.index', $request->obra_id)->with('sucess', 'Tarefa Criada com sucesso.');
     }
 
 

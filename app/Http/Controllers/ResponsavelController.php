@@ -12,7 +12,7 @@ class ResponsavelController extends Controller
 
     public function gerenciarObras()
     {
-        $obras = Obras::where('id', auth()->id())->get();
+        $obras = Obras::where('responsavel_id', auth()->id())->get();
 
         return view('responsavel.gerenciar-obras', compact('obras'));
     }

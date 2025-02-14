@@ -19,6 +19,7 @@
                             <thead>
                                 <tr>
                                     <th class="px-4 py-2">Título</th>
+                                    <th class="px-4 py-2">Comôdo</th>
                                     <th class="px-4 py-2">Descrição</th>
                                     <th class="px-4 py-2">Status</th>
                                 </tr>
@@ -27,6 +28,7 @@
                                 @foreach($obra->tarefas as $tarefa)
                                     <tr>
                                         <td class="px-4 py-2">{{ $tarefa->titulo }}</td>
+                                        <td class="px-4 py-2">{{ $tarefa->comodo }}</td>
                                         <td class="px-4 py-2">{{ $tarefa->descricao }}</td>
                                         <td class="px-4 py-2">{{ $tarefa->status }}</td>
                                     </tr>
@@ -36,7 +38,7 @@
                     @endif
 
                     <a href="{{ route('tarefas.create', $obra->id) }}" 
-                       class="mt-4 inline-block bg-blue-500 text-white px-4 py-2 rounded">
+                       class="mt-4 bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full inline-block">
                         Criar Nova Tarefa
                     </a>
 
