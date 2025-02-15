@@ -16,7 +16,13 @@ middleware tambem foi protegido em web.php
 
 CONTROLLERS
 
-ResponsavelController com os metodos para gerenciar obras e acessar o perfil do responsavel. Método gerenciar obras recupera obras atribuidas ao responsavel e as exibe na interface.
+ResponsavelController: gerenciarObras(): Faz a autenticação do responsavel_id, quando o 'responsavel_id' acessar a pagina gerenciar-obras, somente as obras que este 'responsavel_id' criou serão listadas.
+
+
+ObraController: function index() responsavel por retornar a view gerenciar-obras e, function create(), responsavel por retornar a view criar-obra. function store(Request $request): faz toda a validação dos dados passado pelo usuario e também salva os dados na tabela. function show($id): Faz a autenticação o do usuario que esta tentando acessar  determinada obra, se o usuario for autenticado ira carregar a pagina de detalhes da obra.
+
+TarefaController: index() faz o mesmo que ObraController, valida os dados passado pelo usuario e os salva na tabela, criando assim, a tarefa.
+
 
 VIEWS
 
