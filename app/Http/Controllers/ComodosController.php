@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Colaborador;
+use App\Models\comodos;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ColaboradorController extends Controller
+class ComodosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +35,7 @@ class ColaboradorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(colaborador $colaborador)
+    public function show(comodos $comodos)
     {
         //
     }
@@ -43,7 +43,7 @@ class ColaboradorController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(colaborador $colaborador)
+    public function edit(comodos $comodos)
     {
         //
     }
@@ -51,7 +51,7 @@ class ColaboradorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, colaborador $colaborador)
+    public function update(Request $request, comodos $comodos)
     {
         //
     }
@@ -59,7 +59,7 @@ class ColaboradorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(colaborador $colaborador)
+    public function destroy(comodos $comodos)
     {
         //
     }

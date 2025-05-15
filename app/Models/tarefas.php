@@ -12,7 +12,11 @@ class Tarefas extends Model
     protected $fillable =[
         'titulo',
         'descricao',
-        'status'
+        'status',
+        'comodo', 
+        'obra_id', 
+        'colaborador_id',
+        'tipo_tarefa_id' 
         
     ];
     
@@ -24,11 +28,25 @@ public function obra()
 {
     return $this->belongsTo(Obras::class);
 }
+public function tiposTarefas()
+{
+    return $this->belongsToMany(TipoTarefa::class, 'tarefa_tipo_tarefa', 'tarefa_id', 'tipo_tarefa_id');
+}
+
+
 
 public function colaborador()
 {  // Cada tarefa pertence a um único colaborador.
-    return $this->belongsTo(Colaborador::class);
+    return $this->belongsTo(colaborador_id::class);
 }
+public function tipoTarefa()
+{
+    return $this->belongsTo(TipoTarefa::class);
+}
+
+
+
+
 
 public function material()
 {

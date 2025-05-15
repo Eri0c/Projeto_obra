@@ -20,7 +20,7 @@
                     <p>Você está na página inicial do sistema. Aqui você pode acessar diversas funcionalidades para gerenciar suas obras e tarefas.</p>
 
                     <div class="mt-6">
-                        <a href="{{ route('gerenciar-obras') }}" class="inline-block bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
+                        <a href="{{ route('gerenciar-obras') }}" class="mt-4 bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full inline-block">
                             Acessar Obras
                         </a>
                     </div>

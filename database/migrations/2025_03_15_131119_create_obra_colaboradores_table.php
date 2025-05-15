@@ -11,16 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tarefas', function (Blueprint $table) {
+        Schema::create('obra_colaboradores', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('obra_id')->constrained('obras')->onDelete('cascade');
+            $table->foreignId('obra_id')->constrained()->onDelete('cascade');
             $table->foreignId('colaborador_id')->constrained('users')->onDelete('cascade');
-            $table->string ('titulo');
-            $table->string ('comodo');
-            $table->string ('descricao');
-            $table->enum('status', ['em andamento', 'concluída', 'em espera'])->default('em espera');
-            $table->date ('data_inicio');
-            $table->date ('data_fim')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tarefas');
+        Schema::dropIfExists('obra_colaboradores');
     }
 };

@@ -26,6 +26,10 @@
                             <textarea name="descricao" id="descricao" rows="3" class="mt-1 block w-full" required></textarea>
                         </div>
 
+                        
+
+
+
                         <div class="mb-4">
                             <label for="endereco" class="block text-sm font-medium text-gray-700">Endereço</label>
                             <input type="text" name="endereco" id="endereco" class="mt-1 block w-full" required>

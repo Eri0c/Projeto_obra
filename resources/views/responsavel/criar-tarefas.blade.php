@@ -17,52 +17,50 @@
                     </div>
                     @endif
 
-                    <form action="{{ route('tarefas.store', ['obras' =>$obra->id]) }}" method="POST">
+                    <form action="{{ route('tarefas.store', ['obra' => $obra->id]) }}" method="POST">
                         @csrf
 
                         <input type="hidden" name="obra_id" value="{{ $obra->id }}">
 
+                        <!-- Título -->
                         <div class="mt-4">
                             <x-label for="titulo" value="Título" />
                             <x-input id="titulo" name="titulo" type="text" class="block mt-1 w-full" required />
                         </div>
 
+                        <!-- Cômodo -->
                         <div class="mt-4">
-                            
-                            <select id="comodo" name="comodo" class="block mt-1 w-full" required>
+                            <x-label for="comodo" value="Cômodo" />
+                            <select name="comodo" id="comodo" class="block mt-1 w-full" required>
                                 <option value="">Selecione um cômodo</option>
-                                <option value="quarto">Quarto</option>
-                                <option value="banheiro">Banheiro</option>
-                                <option value="sala">Sala</option>
-                                <option value="cozinha">Cozinha</option>
-                                <option value="garagem">Garagem</option>
-                                <option value="escritório">Escritório</option>
-                                <option value="área de serviço">Área de Serviço</option>
+                                @foreach($comodos as $comodo)
+                                <option value="{{ $comodo->nome }}">{{ $comodo->nome }}</option>
+                                @endforeach
+                                <option value="outro">Adicionar um novo cômodo</option>
                             </select>
-
-
+                            <x-input id="novo_comodo" name="novo_comodo" type="text" class="block mt-1 w-full" placeholder="Ou digite um novo cômodo" />
                         </div>
+
+                        <!-- Tipo de Tarefa -->
                         <div class="mt-4">
-                            
+                            <x-label for="seleciona_tarefa" value="Tarefa" />
                             <select id="seleciona_tarefa" name="seleciona_tarefa" class="block mt-1 w-full" required>
                                 <option value="">Selecione uma tarefa</option>
-                                <option value="pintura">Pintura</option>
-                                <option value="porcelanato">Porcelanato</option>
-                                <option value="sala">Sala</option>
-                                <option value="cozinha">Cozinha</option>
-                                <option value="garagem">Garagem</option>
-                                <option value="escritório">Escritório</option>
-                                <option value="área de serviço">Área de Serviço</option>
+                                @foreach($tipos_tarefas as $tipo)
+                                <option value="{{ $tipo->nome }}">{{ $tipo->nome }}</option>
+                                @endforeach
+                                <option value="outro">Adicionar uma nova tarefa</option>
                             </select>
-
-
+                            <x-input id="nova_tarefa" name="nova_tarefa" type="text" class="block mt-1 w-full" placeholder="Ou digite uma nova tarefa" />
                         </div>
 
+                        <!-- Descrição -->
                         <div class="mt-4">
                             <x-label for="descricao" value="Descrição" />
                             <textarea id="descricao" name="descricao" class="block mt-1 w-full" required></textarea>
                         </div>
 
+                        <!-- Status -->
                         <div class="mt-4">
                             <x-label for="status" value="Status" />
                             <select id="status" name="status" class="block mt-1 w-full">
@@ -76,6 +74,7 @@
                             Criar Tarefa
                         </x-button>
                     </form>
+
 
                 </div>
             </div>

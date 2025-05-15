@@ -25,6 +25,13 @@ class Obras extends Model
         'data_inicio' => 'date',
     ];
 
+    public function colaboradores()
+{
+    return $this->belongsToMany(User::class, 'obra_colaboradores', 'obra_id', 'colaborador_id');
+}
+
+
+
     // Relacionamento obra pertence a um responsavel
     public function responsavel(){
         return $this->belongsTo(User::class, 'responsavel_id');

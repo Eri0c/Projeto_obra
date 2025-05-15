@@ -13,21 +13,8 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens;
+    use HasApiTokens, HasFactory, HasProfilePhoto, HasTeams, Notifiable, TwoFactorAuthenticatable;
 
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory;
-    use HasProfilePhoto;
-    use HasTeams;
-    use Notifiable;
-    use TwoFactorAuthenticatable;
-
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'name',
         'email',
@@ -38,11 +25,6 @@ class User extends Authenticatable
         'telefone',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
@@ -50,20 +32,10 @@ class User extends Authenticatable
         'two_factor_secret',
     ];
 
-    /**
-     * The accessors to append to the model's array form.
-     *
-     * @var array<int, string>
-     */
     protected $appends = [
         'profile_photo_url',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
@@ -72,30 +44,13 @@ class User extends Authenticatable
         ];
     }
 
-
-    //Relacionamento com cliente
-
-    public function cliente()
-    {
-        return $this->hasOne(Cliente::class);
-    }
-
-    public function responsavel()
-    {
-        return $this->hasOne(Responsavel::class);
-    }
-
-    public function colaborador()
-    {
-        return $this-> hasOne(Colaborador::class);
-    }
-
-    //Relacionamento com Obra (muitos para muitos)
+    // Relacionamento com Obra (Muitos para Muitos)
     public function obras()
     {
-        return $this->belongsToMany(Obra::class, 'usuario_obra');
+        return $this->belongsToMany(Obras::class, 'obra_colaboradores', 'colaborador_id', 'obra_id');
     }
 
+    // Métodos para verificar permissões
     public function isCliente()
     {
         return $this->tipo === 'cliente';
@@ -105,12 +60,9 @@ class User extends Authenticatable
     {
         return $this->tipo === 'responsavel';
     }
-    
 
     public function isColaborador()
     {
         return $this->tipo === 'colaborador';
     }
 }
-
-    
