@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Validation\Rules\Unique;
 
 use function Laravel\Prompts\table;
 
@@ -23,6 +24,8 @@ return new class extends Migration
             $table->string('telefone')->nullable();
             $table->string('password');
             $table->enum('tipo',['cliente', 'responsavel', 'colaborador']);
+            $table->string('codigo_autorizacao')->nullable();
+            $table->timestamp('codigo_expira_em')->nullable();
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();

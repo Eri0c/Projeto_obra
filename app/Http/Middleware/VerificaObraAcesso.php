@@ -21,7 +21,7 @@ class VerificaObraAcesso
         }
 
         // Verifica se o usuário é um Colaborador e se está vinculado à obra
-        if ($user->isColaborador() && $user->obras()->where('id', $obraId)->exists()) {
+        if ($user->isColaborador() && $user->obras()->where('obras.id', $obraId)->exists()) {
             return $next($request);
         }
 

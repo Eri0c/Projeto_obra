@@ -1,14 +1,17 @@
-@extends('layouts.app')
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            Minhas Obras
+        </h2>
+    </x-slot>
 
-@section('content')
-    <h2>Minhas Obras</h2>
     @if($obras->isEmpty())
-        <p>Você ainda não foi cadastrado em nenhuma obra.</p>
+        <p class="p-4">Você ainda não foi cadastrado em nenhuma obra.</p>
     @else
-        <ul>
+        <ul class="p-4 list-disc list-inside">
             @foreach($obras as $obra)
-                <li>{{ $obra->nome }} - <a href="{{ route('obras.show', $obra->id) }}">Ver Detalhes</a></li>
+                <li>{{ $obra->nome }} - <a class="text-blue-600 underline" href="{{ route('obras.show', $obra->id) }}">Ver Detalhes</a></li>
             @endforeach
         </ul>
     @endif
-@endsection
+</x-app-layout>

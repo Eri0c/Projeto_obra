@@ -1,13 +1,44 @@
 <?php 
 namespace App\Http\Controllers;
-
-use App\Models\Obras;
+use App\Models\User;
+use App\Models\Obra;
+use App\Models\colaborador;
 use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class ObraController extends Controller
 {   
+
+    public function adicionarColaboradorView($obraId)
+{
+    $obra = Obra::findOrFail($obraId);
+
+    return view('obras.adicionar-colaborador', compact('obra'));
+}
+
+   public function adicionarColaboradorPorCodigo(Request $request, Obra $obra)
+{
+    $request->validate([
+        'codigo_autorizacao' => 'required|string',
+    ]);
+
+    $colaborador = User::where('codigo_autorizacao', $request->codigo_autorizacao)->first();
+
+    if (!$colaborador) {
+        return back()->withErrors(['codigo_autorizacao' => 'Código inválido.']);
+    }
+
+    // Vincular colaborador à obra (ajuste conforme sua lógica de relacionamento)
+    $obra->colaboradores()->syncWithoutDetaching([$colaborador->id]);
+
+    // Limpar código usado
+    $colaborador->codigo_autorizacao = null;
+    $colaborador->save();
+
+    return back()->with('success', 'Colaborador vinculado com sucesso!');
+}
     /**
      * Display a listing of the resource.
      */
@@ -17,13 +48,13 @@ class ObraController extends Controller
 
         if ($user->tipo === 'responsavel') {
             // Busca todas as obras do responsável
-            $obras = Obras::where('responsavel_id', $user->id)->get();
-            return view('responsavel.gerenciar-obras',compact ('obras'));
+            $obras = Obra::where('responsavel_id', $user->id)->get();
+            return view('responsavel.gerenciar-obras',compact('obras'));
             
             
         } elseif ($user->tipo === 'colaborador') {
             // Busca apenas as obras onde o colaborador está cadastrado
-            $obras = Obras::whereHas('colaboradores', function ($query) use ($user) {
+            $obras = Obra::whereHas('colaboradores', function ($query) use ($user) {
                 $query->where('colaborador_id', $user->id);
             })->get();
             return view('colaborador.obras', compact('obras'));
@@ -55,7 +86,7 @@ class ObraController extends Controller
             'data_prevista_conclusao' => 'required|date',
         ]);
 
-        $obra = new Obras();
+        $obra = new Obra();
         $obra->nome = $validated['nome'];
         $obra->descricao = $validated['descricao'];
         $obra->endereco = $validated['endereco'];
@@ -74,7 +105,7 @@ class ObraController extends Controller
      */
     public function show($id)
     {
-        $obra = Obras::findOrFail($id);
+        $obra = Obra::findOrFail($id);
 
         if ($obra->responsavel_id != auth()->id()){
             abort(403, 'Você não tem permissão para visualizar esta obra');
@@ -86,7 +117,7 @@ class ObraController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Obras $obras)
+    public function edit(Obra $obras)
     {
         //
     }

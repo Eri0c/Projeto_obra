@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Psy\TabCompletion\Matcher\FunctionsMatcher;
 
-class Obras extends Model
+class Obra extends Model
 {
     use HasFactory;
 
@@ -25,10 +25,13 @@ class Obras extends Model
         'data_inicio' => 'date',
     ];
 
-    public function colaboradores()
+   
+public function colaboradores()
 {
-    return $this->belongsToMany(User::class, 'obra_colaboradores', 'obra_id', 'colaborador_id');
+    return $this->belongsToMany(User::class, 'obra_user', 'obra_id', 'user_id');
 }
+
+
 
 
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tarefas;
-use App\Models\Obras;
+use App\Models\Obra;
 use App\Models\comodos;
 use App\Models\TipoTarefa;
 use App\Http\Controllers\Controller;
@@ -19,7 +19,7 @@ class TarefaController extends Controller
     public function index($obra_id)
     {
         //
-        $obra = Obras::with('tarefas')->findOrFail($obra_id);
+        $obra = Obra::with('tarefas')->findOrFail($obra_id);
         return view('responsavel.lista-tarefas', compact('obra'));
     }
 
@@ -28,7 +28,7 @@ class TarefaController extends Controller
      */
     public function create($obra_id)
     {
-        $obra = Obras::findOrFail($obra_id);
+        $obra = Obra::findOrFail($obra_id);
         $comodos = Comodos::all();
         $tipos_tarefas = TipoTarefa::all();
 
