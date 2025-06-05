@@ -26,18 +26,18 @@ class Tarefas extends Model
 
 public function obra()
 {
-    return $this->belongsTo(Obras::class);
+    return $this->belongsTo(Obra::class);
 }
 public function tiposTarefas()
 {
     return $this->belongsToMany(TipoTarefa::class, 'tarefa_tipo_tarefa', 'tarefa_id', 'tipo_tarefa_id');
 }
 
-
+ 
 
 public function colaborador()
 {  // Cada tarefa pertence a um único colaborador.
-    return $this->belongsTo(colaborador_id::class);
+    return $this->belongsTo(User::class, 'colaborador_id');
 }
 public function tipoTarefa()
 {

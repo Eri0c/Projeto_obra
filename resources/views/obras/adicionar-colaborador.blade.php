@@ -9,7 +9,8 @@
         <div class="bg-white p-6 rounded shadow">
             <h3>Obra: {{ $obra->nome }}</h3>
 
-            <form action="{{ route('obras.colaboradores.adicionar', $obra->id) }}" method="POST">
+            <form action="{{ route('obras.colaboradores.adicionar', ['obra' => $obra->id]) }}" method="POST">
+
                 @csrf
                 <label for="codigo" class="block font-medium text-sm text-gray-700">Código do Colaborador:</label>
                 <input

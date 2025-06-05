@@ -36,18 +36,16 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
+   protected $casts = [
+    'email_verified_at' => 'datetime',
+    'password' => 'hashed',
+];
+
 
     // Relacionamento com Obra (Muitos para Muitos)
     public function obras()
     {
-        return $this->belongsToMany(Obras::class, 'obra_colaboradores', 'colaborador_id', 'obra_id');
+        return $this->belongsToMany(Obra::class, 'obra_colaboradores', 'colaborador_id', 'obra_id');
     }
 
     // Métodos para verificar permissões

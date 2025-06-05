@@ -19,8 +19,17 @@ class TarefaController extends Controller
     public function index($obra_id)
     {
         //
-        $obra = Obra::with('tarefas')->findOrFail($obra_id);
+        $user = auth()-> user();
+        if ($user->tipo === 'responsavel'){
+             $obra = Obra::with('tarefas')->findOrFail($obra_id);
         return view('responsavel.lista-tarefas', compact('obra'));
+        }else ($user->tipo =='colaborador' );
+        {
+            $obras = Obra::with('tarefas')->findOrFail($obra_id);
+            return view('colaborador.lista-tarefas');
+        }
+        
+       
     }
 
     /**

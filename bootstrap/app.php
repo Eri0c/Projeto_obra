@@ -13,8 +13,10 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         // Registrando middlewares
         $middleware->alias([
-            'verificaResponsavel' => \App\Http\Middleware\VerificaResponsavel::class,
+            'responsavel' => \App\Http\Middleware\ResponsavelMiddleware::class,
+            'colaborador' => \App\Http\Middleware\ColaboradorMiddleware::class,
             'verificaObraAcesso' => \App\Http\Middleware\VerificaObraAcesso::class, 
+            
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

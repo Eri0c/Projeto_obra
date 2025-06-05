@@ -5,15 +5,15 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Models\Obras;
+use App\Models\Obra;
 
 class VerificaObraAcesso
 {
     public function handle(Request $request, Closure $next): Response
     {
-        //dd($request->route()); // Isso mostrará todos os parâmetros da rota
+        
         $user = auth()->user();
-        $obraId = $request->route('obra') ?? $request->route('id');
+        $obraId = $request->route('id');
 
         // Verifica se o usuário é um Responsável (pode acessar todas as obras)
         if ($user->isResponsavel()) {

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ColaboradorController;
 use App\Http\Controllers\ObraController;
 use App\Http\Controllers\ResponsavelController;
 use App\Http\Controllers\TarefaController;
@@ -8,36 +9,25 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', fn() => view('welcome'));
 Route::get('/home', fn() => view('home'))->name('home');
 
-// Rota dinâmica do dashboard baseada no tipo de usuário
+
 Route::get('/dashboard', function () {
     $user = auth()->user();
 
-    if ($user->isResponsavel()) {
-        return redirect()->route('gerenciar-obras');
-    }
-
+    if ($user->isResponsavel()) {return redirect()->route('gerenciar-obras');}
     if ($user->isColaborador()) {
-    $obra = $user->obras()->first();
+        $obra = $user->obras()->first();
+        if (!$obra) {return view('colaborador.aguardando-vinculo');
+    }
+    if ($user->obras()->where('obras.id', $obra->id)->exists()){
+            return redirect()->route('obras.show', ['id' => $obra->id]);
 
-        if(!$obra){
-            //Nenhuma obra vinculada: redireciona para gerar codigo
-            return redirect()->route('colaborador.gerar-codigo.view');
-        }
-
-    if ($obra) {
-        return redirect()->route('tarefas.index', ['obra' => $obra->id]);
-    } else {
-        return view('colaborador.aguardando-vinculo');
     }
 }
-
-
-    if ($user->isCliente()) {
-        return redirect()->route('home');
-    }
-
+    if ($user->isCliente()) {return redirect()->route('home');}
+        
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+
+})->name('dashboard');
 
 // Obras - listagem
 Route::middleware(['auth'])->group(function () {
@@ -49,21 +39,23 @@ Route::middleware(['auth', 'verificaObraAcesso'])->group(function () {
     Route::get('/obras/{id}', [ObraController::class, 'show'])->name('obras.show');
 });
 
-// Responsável - gerenciar
-Route::middleware(['auth', 'verificaResponsavel'])->group(function () {
-    Route::get('/gerenciar-obras', [ResponsavelController::class, 'gerenciarObras'])->name('gerenciar-obras');
-    Route::get('/perfil', [ResponsavelController::class, 'perfil']);
-    Route::get('/responsavel/criar-obra', [ObraController::class, 'create'])->name('obras.create');
-    Route::resource('obras', ObraController::class)->except(['index', 'show']);
+Route::middleware(['auth'])->get('/obras', [ObraController::class, 'index'])->name('obras.index');
 
-    Route::get('/obras/{obra}/colaboradores/adicionar', [ObraController::class, 'adicionarColaboradorView'])
-    ->name('obras.colaboradores.adicionar');
+// Responsável - gerenciar
+Route::middleware(['auth', 'responsavel'])->group(function () {
+    Route::get('/gerenciar-obras', [ResponsavelController::class, 'gerenciarObras'])->name('gerenciar-obras');
+    Route::get('obras/create', [ObraController::class, 'create'])->name('obras.create');
+    Route::post('/obras', [ObraController::class, 'store'])->name('obras.store');
+    Route::get('/perfil', [ResponsavelController::class, 'perfil']);
+
+    Route::get('/obras/{obra}/colaboradores/adicionar', [ObraController::class, 'AdicionarColaboradorView'])
+    ->name('obras.colaboradores.form');
 
     Route::post('/obras/{obra}/colaboradores/adicionar', [ObraController::class, 'adicionarColaboradorPorCodigo'])
-    ->name('obras.colaboradores.adicionar.post');
-
-
+    ->name('obras.colaboradores.adicionar');
 });
+
+
 
 
 

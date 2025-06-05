@@ -27,13 +27,15 @@ class ObraController extends Controller
     $colaborador = User::where('codigo_autorizacao', $request->codigo_autorizacao)->first();
 
     if (!$colaborador) {
-        return back()->withErrors(['codigo_autorizacao' => 'Código inválido.']);
+        return back()->withErrors(['codigo_autorizacao' => 'Código inválido']);
     }
 
-    // Vincular colaborador à obra (ajuste conforme sua lógica de relacionamento)
-    $obra->colaboradores()->syncWithoutDetaching([$colaborador->id]);
+    // Verficando se o colaborador ainda nao esta vinculado a obra.
+    if (!$obra->colaboradores->contains($colaborador->id)){
+        $obra->colaboradores()->attach($colaborador->id);
+    }
 
-    // Limpar código usado
+    //Limpar código usado
     $colaborador->codigo_autorizacao = null;
     $colaborador->save();
 
@@ -53,13 +55,13 @@ class ObraController extends Controller
             
             
         } elseif ($user->tipo === 'colaborador') {
-            // Busca apenas as obras onde o colaborador está cadastrado
+            //Busca apenas as obras onde o colaborador está cadastrado
             $obras = Obra::whereHas('colaboradores', function ($query) use ($user) {
-                $query->where('colaborador_id', $user->id);
+                $query->where('user_id', $user->id);
             })->get();
             return view('colaborador.obras', compact('obras'));
         } else {
-            // Redireciona qualquer outro tipo de usuário
+            //redireciona qualquer outro tipo de usuário
             return redirect('/home')->with('error', 'Acesso não autorizado.');
         }
     }
@@ -69,7 +71,8 @@ class ObraController extends Controller
      */
     public function create()
     {
-        return view('responsavel.criar-obra');
+        //Exibe formulario para a criação de obras
+        return view('obras.create');
     }
 
     /**
@@ -106,12 +109,22 @@ class ObraController extends Controller
     public function show($id)
     {
         $obra = Obra::findOrFail($id);
+        $user = auth()->user();
 
-        if ($obra->responsavel_id != auth()->id()){
-            abort(403, 'Você não tem permissão para visualizar esta obra');
+
+
+      if ($user->isColaborador()) {
+        // Verifica se o colaborador está vinculado à obra
+        if ($user->obras->contains('id', $obra->id)) {
+            return view('colaborador.obras',['obras' => collect([$obra])]);
         }
 
-        return view('responsavel.obra-detalhes', compact('obra'));
+        // Caso não esteja vinculado a nenhuma obra, mostra a view aguardando
+        if ($user->obras()->count() == 0) {
+            return view('colaborador.aguardando-vinculo');
+        }
+        abort(403, 'Você não tem permissão para visualizar esta obra');
+    }
     }
 
     /**
@@ -125,7 +138,7 @@ class ObraController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Obras $obra)
+    public function update(Request $request, Obra $obra)
     {
         //
     }
@@ -133,7 +146,7 @@ class ObraController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Obras $obra)
+    public function destroy(Obra $obra)
     {
         //
     }
