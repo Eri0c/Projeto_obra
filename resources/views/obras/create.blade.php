@@ -54,7 +54,7 @@
                             <input type="date" name="data_prevista_conclusao" id="data_prevista_conclusao" class="mt-1 block w-full" required>
                         </div>
 
-                        <button type="submit" class="bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Criar Obra</button>
+                               <x-button>Criar obra</x-button>
                     </form>
                 </div>
             </div>
