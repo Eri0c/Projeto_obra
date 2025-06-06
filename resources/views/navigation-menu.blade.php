@@ -11,11 +11,42 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                </div>
+                @auth
+    <!-- Link comum para todos -->
+    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+        {{ __('Dashboard') }}
+    </x-nav-link>
+
+    <!-- Links visíveis apenas para Responsável -->
+    @if (auth()->user()->isResponsavel())
+        <x-nav-link :href="route('gerenciar-obras')" :active="request()->routeIs('gerenciar-obras')">
+            {{ __('Gerenciar Obras') }}
+        </x-nav-link>
+        <x-nav-link :href="route('obras.create')" :active="request()->routeIs('obras.create')">
+            {{ __('Cadastrar Obra') }}
+        </x-nav-link>
+        <x-nav-link :href="route('profile.show')" :active="request()->routeIs('profile.show')">
+            {{ __('Meu Perfil') }}
+        </x-nav-link>
+    @endif
+
+    <!-- Links visíveis apenas para Colaborador -->
+    @if (auth()->user()->isColaborador())
+        <x-nav-link :href="route('colaborador.obras')" :active="request()->routeIs('colaborador.obras')">
+            {{ __('Minhas Obras') }}
+        </x-nav-link>
+    @endif
+
+    <!-- Links visíveis apenas para Cliente -->
+    @if (auth()->user()->isCliente())
+        <x-nav-link :href="route('cliente.feed')" :active="request()->routeIs('cliente.feed')">
+            {{ __('Acompanhar Obra') }}
+        </x-nav-link>
+    @endif
+@endauth
+
+                
+                
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">
