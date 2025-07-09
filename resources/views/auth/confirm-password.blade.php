@@ -13,10 +13,9 @@
         <form method="POST" action="{{ route('password.confirm') }}">
             @csrf
 
-            <div>
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" autofocus />
-            </div>
+            <x-form-field for="password" label="{{ __('Password') }}">
+                <x-input id="password" type="password" name="password" required autocomplete="current-password" autofocus />
+            </x-form-field>
 
             <div class="flex justify-end mt-4">
                 <x-button class="ms-4">

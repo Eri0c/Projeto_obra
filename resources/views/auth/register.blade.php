@@ -55,8 +55,7 @@
             </div>
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
-                <div class="mt-4">
-                    <x-label for="terms">
+                <x-form-field for="terms">
                         <div class="flex items-center">
                             <x-checkbox name="terms" id="terms" required />
 
@@ -67,8 +66,7 @@
                                 ]) !!}
                             </div>
                         </div>
-                    </x-label>
-                </div>
+                    </x-form-field>
             @endif
 
             <div class="flex items-center justify-end mt-4">

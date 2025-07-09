@@ -19,7 +19,7 @@
                     </div>
 
                     <div class="mt-6">
-                        <a href="{{ route('profile.edit') }}" class="text-blue-500">Editar Perfil</a>
+                        <a href="{{ route('profile.edit') }}" class="button-link">Editar Perfil</a>
                     </div>
                 </div>
             </div>

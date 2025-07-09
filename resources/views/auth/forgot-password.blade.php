@@ -19,10 +19,9 @@
         <form method="POST" action="{{ route('password.email') }}">
             @csrf
 
-            <div class="block">
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            </div>
+            <x-form-field for="email" label="{{ __('Email') }}">
+                <x-input id="email" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+            </x-form-field>
 
             <div class="flex items-center justify-end mt-4">
                 <x-button>

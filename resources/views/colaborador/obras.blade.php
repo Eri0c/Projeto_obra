@@ -10,7 +10,7 @@
     @else
         <ul class="p-4 list-disc list-inside">
             @foreach($obras as $obra)
-                <li>{{ $obra->nome }} - <a class="text-blue-600 underline" href="{{ route('obras.show', $obra->id) }}">Ver Detalhes</a></li>
+                <li class="list-item">{{ $obra->nome }} - <a class="list-link" href="{{ route('obras.show', $obra->id) }}">Ver Detalhes</a></li>
             @endforeach
         </ul>
     @endif

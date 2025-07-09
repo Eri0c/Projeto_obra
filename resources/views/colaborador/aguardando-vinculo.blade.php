@@ -9,7 +9,7 @@
         </form>
 
         @if(session('codigo'))
-            <div class="alert alert-success mt-3">
+            <div class="success-message">
                 <strong>Seu código:</strong> {{ session('codigo') }} <br>
                 Envie esse código ao responsável.
             </div>

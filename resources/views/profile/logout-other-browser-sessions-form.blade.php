@@ -8,15 +8,15 @@
     </x-slot>
 
     <x-slot name="content">
-        <div class="max-w-xl text-sm text-gray-600">
+        <div>
             {{ __('If necessary, you may log out of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive. If you feel your account has been compromised, you should also update your password.') }}
         </div>
 
         @if (count($this->sessions) > 0)
-            <div class="mt-5 space-y-6">
+            <div class="session-list">
                 <!-- Other Browser Sessions -->
                 @foreach ($this->sessions as $session)
-                    <div class="flex items-center">
+                    <div class="session-item">
                         <div>
                             @if ($session->agent->isDesktop())
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 text-gray-500">
@@ -29,21 +29,19 @@
                             @endif
                         </div>
 
-                        <div class="ms-3">
-                            <div class="text-sm text-gray-600">
+                        <div class="session-details">
+                            <div class="session-platform">
                                 {{ $session->agent->platform() ? $session->agent->platform() : __('Unknown') }} - {{ $session->agent->browser() ? $session->agent->browser() : __('Unknown') }}
                             </div>
 
-                            <div>
-                                <div class="text-xs text-gray-500">
-                                    {{ $session->ip_address }},
+                            <div class="session-info">
+                                {{ $session->ip_address }},
 
-                                    @if ($session->is_current_device)
-                                        <span class="text-green-500 font-semibold">{{ __('This device') }}</span>
-                                    @else
-                                        {{ __('Last active') }} {{ $session->last_active }}
-                                    @endif
-                                </div>
+                                @if ($session->is_current_device)
+                                    <span class="text-green-500 font-semibold">{{ __('This device') }}</span>
+                                @else
+                                    {{ __('Last active') }} {{ $session->last_active }}
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -71,7 +69,7 @@
                 {{ __('Please enter your password to confirm you would like to log out of your other browser sessions across all of your devices.') }}
 
                 <div class="mt-4" x-data="{}" x-on:confirming-logout-other-browser-sessions.window="setTimeout(() => $refs.password.focus(), 250)">
-                    <x-input type="password" class="mt-1 block w-3/4"
+                    <x-input type="password" 
                                 autocomplete="current-password"
                                 placeholder="{{ __('Password') }}"
                                 x-ref="password"

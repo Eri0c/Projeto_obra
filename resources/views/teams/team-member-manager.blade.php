@@ -3,7 +3,7 @@
         <x-section-border />
 
         <!-- Add Team Member -->
-        <div class="mt-10 sm:mt-0">
+        <div>
             <x-form-section submit="addTeamMember">
                 <x-slot name="title">
                     {{ __('Add Team Member') }}
@@ -29,7 +29,7 @@
 
                     <!-- Role -->
                     @if (count($this->roles) > 0)
-                        <div class="col-span-6 lg:col-span-4">
+                        <div>
                             <x-label for="role" value="{{ __('Role') }}" />
                             <x-input-error for="role" class="mt-2" />
 
@@ -80,7 +80,7 @@
         <x-section-border />
 
         <!-- Team Member Invitations -->
-        <div class="mt-10 sm:mt-0">
+        <div>
             <x-action-section>
                 <x-slot name="title">
                     {{ __('Pending Team Invitations') }}
@@ -117,7 +117,7 @@
         <x-section-border />
 
         <!-- Manage Team Members -->
-        <div class="mt-10 sm:mt-0">
+        <div>
             <x-action-section>
                 <x-slot name="title">
                     {{ __('Team Members') }}
@@ -177,9 +177,9 @@
         </x-slot>
 
         <x-slot name="content">
-            <div class="relative z-0 mt-1 border border-gray-200 rounded-lg cursor-pointer">
+            <div class="role-management-container">
                 @foreach ($this->roles as $index => $role)
-                    <button type="button" class="relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 {{ $index > 0 ? 'border-t border-gray-200 focus:border-none rounded-t-none' : '' }} {{ ! $loop->last ? 'rounded-b-none' : '' }}"
+                    <button type="button" class="role-option-button {{ $index > 0 ? 'border-t' : '' }}"
                                     wire:click="$set('currentRole', '{{ $role->key }}')">
                         <div class="{{ $currentRole !== $role->key ? 'opacity-50' : '' }}">
                             <!-- Role Name -->

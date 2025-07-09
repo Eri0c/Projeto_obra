@@ -18,7 +18,7 @@
         </form>
 
         @if (session('codigo'))
-            <div class="mt-6 p-4 bg-green-100 border border-green-400 rounded">
+            <div class="success-message">
                 <strong>Código gerado:</strong> {{ session('codigo') }}
             </div>
         @endif

@@ -14,23 +14,23 @@
                     @if($tarefas->isEmpty())
                         <p>Nenhuma obra em andamento.</p>
                     @else
-                        <table class="min-w-full table-auto">
+                        <table class="data-table">
                             <thead>
-                                <tr>
-                                    <th class="px-4 py-2">Nome da Obra</th>
-                                    <th class="px-4 py-2">Data de Início</th>
-                                    <th class="px-4 py-2">Status</th>
-                                    <th class="px-4 py-2">Ações</th>
+                                <tr class="table-header">
+                                    <th class="table-cell">Nome da Obra</th>
+                                    <th class="table-cell">Data de Início</th>
+                                    <th class="table-cell">Status</th>
+                                    <th class="table-cell">Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($obras as $obra)
-                                    <tr>
-                                        <td class="px-4 py-2">{{ $obra->nome }}</td>
-                                        <td class="px-4 py-2">{{ $obra->data_inicio->format('d/m/Y') }}</td>
-                                        <td class="px-4 py-2">{{ $obra->status }}</td>
-                                        <td class="px-4 py-2">
-                                            <a href="{{ route('obras.show', $obra->id) }}" class="text-blue-500">Ver Detalhes</a>
+                                    <tr class="table-row">
+                                        <td class="table-cell">{{ $obra->nome }}</td>
+                                        <td class="table-cell">{{ $obra->data_inicio->format('d/m/Y') }}</td>
+                                        <td class="table-cell">{{ $obra->status }}</td>
+                                        <td class="table-cell">
+                                            <a href="{{ route('obras.show', $obra->id) }}" class="action-link">Ver Detalhes</a>
                                         </td>
                                     </tr>
                                 @endforeach

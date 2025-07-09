@@ -8,10 +8,8 @@
     </x-slot>
 
     <x-slot name="form">
-        <!-- Profile Photo -->
         @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-            <div x-data="{photoName: null, photoPreview: null}" class="col-span-6 sm:col-span-4">
-                <!-- Profile Photo File Input -->
+            <x-form-field for="photo" label="{{ __('Photo') }}">
                 <input type="file" id="photo" class="hidden"
                             wire:model.live="photo"
                             x-ref="photo"
@@ -23,8 +21,6 @@
                                     };
                                     reader.readAsDataURL($refs.photo.files[0]);
                             " />
-
-                <x-label for="photo" value="{{ __('Photo') }}" />
 
                 <!-- Current Profile Photo -->
                 <div class="mt-2" x-show="! photoPreview">
@@ -49,7 +45,7 @@
                 @endif
 
                 <x-input-error for="photo" class="mt-2" />
-            </div>
+            </x-form-field>
         @endif
 
         <!-- Name -->

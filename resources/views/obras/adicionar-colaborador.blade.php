@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="form-title">
             {{ __('Adicionar Colaborador à Obra') }}
         </h2>
     </x-slot>
@@ -12,14 +12,14 @@
             <form action="{{ route('obras.colaboradores.adicionar', ['obra' => $obra->id]) }}" method="POST">
 
                 @csrf
-                <label for="codigo" class="block font-medium text-sm text-gray-700">Código do Colaborador:</label>
-                <input
+                <x-form-field for="codigo" label="Código do Colaborador:">
+                <x-input
                     type="text"
                     name="codigo"
                     id="codigo"
-                    class="border rounded w-full py-2 px-3 mt-1 mb-4"
                     required
-                >
+                />
+            </x-form-field>
 
                 <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
                     Vincular Colaborador

@@ -12,12 +12,17 @@
 
                 <!-- Navigation Links -->
                 @auth
-    <!-- Link comum para todos -->
-    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-        {{ __('Dashboard') }}
+    
+    <x-nav-link :href="route('dashboard')" 
+                :active="request()->routeIs('dashboard')">
+                
+                {{ __('Dashboard') }}
     </x-nav-link>
+    
+    <nav class="bg-white border-b border-gray-200 shadow-sm">
+    
 
-    <!-- Links visíveis apenas para Responsável -->
+    
     @if (auth()->user()->isResponsavel())
         <x-nav-link :href="route('gerenciar-obras')" :active="request()->routeIs('gerenciar-obras')">
             {{ __('Gerenciar Obras') }}
@@ -30,14 +35,14 @@
         </x-nav-link>
     @endif
 
-    <!-- Links visíveis apenas para Colaborador -->
+
     @if (auth()->user()->isColaborador())
         <x-nav-link :href="route('colaborador.obras')" :active="request()->routeIs('colaborador.obras')">
             {{ __('Minhas Obras') }}
         </x-nav-link>
     @endif
 
-    <!-- Links visíveis apenas para Cliente -->
+    
     @if (auth()->user()->isCliente())
         <x-nav-link :href="route('cliente.feed')" :active="request()->routeIs('cliente.feed')">
             {{ __('Acompanhar Obra') }}
@@ -168,7 +173,7 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+    <div :class="{'block': open, 'hidden': ! open}">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}

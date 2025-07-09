@@ -60,17 +60,15 @@
                             <textarea id="descricao" name="descricao" class="block mt-1 w-full" required></textarea>
                         </div>
 
-                        <!-- Status -->
-                        <div class="mt-4">
-                            <x-label for="status" value="Status" />
-                            <select id="status" name="status" class="block mt-1 w-full">
+                        <x-form-field for="status" label="Status">
+                            <select id="status" name="status">
                                 <option value="em andamento">Em Andamento</option>
                                 <option value="concluída">Concluída</option>
                                 <option value="em espera">Em Espera</option>
                             </select>
-                        </div>
+                        </x-form-field>
 
-                        <x-button class="mt-4">
+                        <x-button class="button">
                             Criar Tarefa
                         </x-button>
                     </form>

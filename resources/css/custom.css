@@ -1,0 +1,13 @@
+
+/* Recovery Codes Container Styles */
+.recovery-codes-container {
+    display: grid;
+    gap: 0.25rem;
+    max-width: 28rem;
+    margin-top: 1rem;
+    padding: 1rem;
+    font-family: monospace;
+    font-size: 0.875rem;
+    background-color: #f8f9fa;
+    border-radius: 0.5rem;
+}

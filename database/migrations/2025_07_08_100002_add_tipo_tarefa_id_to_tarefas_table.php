@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('materials', function (Blueprint $table) {
-            $table->id();
-            $table->string('nome');
-            $table->text('descricao')->nullable();
-            $table->string('unidade_medida');
-            $table->timestamps();
+        Schema::table('tarefas', function (Blueprint $table) {
+            $table->foreignId('tipo_tarefa_id')->nullable()->constrained('tipos_tarefa')->onDelete('set null');
         });
     }
 
@@ -25,6 +21,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('materials');
+        Schema::table('tarefas', function (Blueprint $table) {
+            $table->dropForeign(['tipo_tarefa_id']);
+            $table->dropColumn('tipo_tarefa_id');
+        });
     }
 };
