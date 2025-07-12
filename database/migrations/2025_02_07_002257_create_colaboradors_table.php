@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('telefone');
             $table->string('cpf')->unique();
             $table->string('endereco');
+            $table->string('especialidade');
+            $table->string('codigo')->unique();
             $table->enum('status', ['ativo', 'inativo'])->default('ativo');
             $table->timestamps();
         });
