@@ -16,7 +16,7 @@
     <body class="font-sans antialiased">
         <div class="welcome-page">
             <header class="navigation-menu">
-                <div class="logo">Sua Empresa</div>
+                <div class="logo">ObraFacil</div>
                 @if (Route::has('login'))
                     <nav>
                         <ul>
@@ -35,14 +35,14 @@
             </header>
 
             <div class="main-content">
-                <div class="logo-main">[LOGO DA EMPRESA AQUI]</div>
-                <h1>Bem-vindo à Sua Empresa!</h1>
-                <p>Soluções inovadoras para o seu negócio.</p>
+                <div class="logo-main">ObraFacil</div>
+                <h1>Gerencie sua obra de forma fácil e eficiente</h1>
+                <p>Controle tarefas, materiais e colaboradores em um só lugar.</p>
                 <a href="{{ route('register') }}" class="cta-button">Comece Agora</a>
             </div>
 
             <footer class="py-16 text-center text-sm text-black">
-                Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
+                ObraFacil &copy; 2025
             </footer>
         </div>
     </body>
